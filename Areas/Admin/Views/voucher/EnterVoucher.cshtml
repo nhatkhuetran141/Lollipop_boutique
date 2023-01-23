@@ -1,0 +1,97 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.voucher
+@{
+    ViewData["Title"] = "Create New Voucher";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+<head>
+    <link href="~/admin/css/EditCustomer.css" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <div class="card">
+        <div class="card-header"><h3>New Voucher</h3></div>
+    </div>
+</head>
+    <div class="container">
+        <form>
+        <div class="createcategory" style="border-color: coral;border-radius: 25px;margin-top: 5%; padding: 3% 3% 7% 3%; border: 2px solid #aaa;">
+            <a href="~/Admin/voucher/LietKeVoucher" style="margin-bottom:2%"class="btn btn-success">Back to Voucher Management</a>               
+            <div class="row body_insertcustomer">
+                                <div class="col-md">            
+                                    <!-- MaKH input -->
+                                    @*<div class="input_field">
+                                        <div class="input_field_title">Customer ID*</div>
+                                        <input type="text" id="idcustomer" name="MAKH" placeholder="VD:KH01">                   
+                                    </div>*@
+                                    <!-- Name -->
+                                    <div class="input_field">
+                                        <div class="input_field_title">Name*</div>
+                                        <input type="text" id="name" name="TenVoucher" placeholder="22/12"/>
+                                    </div>  
+                                     <div class="input_field">
+                                        <div class="input_field_title">Value</div>
+                                        <input type="text" id="value" name="TiLeGiamGia" placeholder="100%"/>
+                                    </div> 
+                                    <!-- street address -->
+                                    <div class="input_field">
+                                        <div class="input_field_title">Start Date</div>
+                                        @*<input type="text" id="date_of_birth" name="date_of_birth">*@
+                                        <input id="datepicker" class="datepicker1" width="276" name="NgayBatDau"/>
+                                    </div>                      
+                                    <script>
+                                        $('#datepicker').datepicker({
+                                            uiLibrary: 'bootstrap4'
+                                        });                                       
+                                    </script>
+                                    <div class="input_field">
+                                        <div class="input_field_title">Finish Date</div>
+                                        @*<input type="text" id="date_of_birth" name="date_of_birth">*@
+                                        <input id="datepicker3" class="datepicker2" width="276" name="NgayKetThuc"/>
+                                    </div>                      
+                                    <script>
+                                        $('#datepicker3').datepicker({
+                                            uiLibrary: 'bootstrap4'
+                                        });                                       
+                                    </script>                                   
+                            </div>    
+               </div>
+             <a href="javascript:void(0)" class="btn btn-success btn_insertcustomer" value="Thêm" style="float:right">Create New Voucher</a>    
+        </div>            
+    </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_insertcustomer").click(function () {
+            console.log ('Da vao click');    
+            //var id =$('#idcustomer').val();
+            var ten = $('#name').val();
+            var value = $('#value').val();
+            var date1 = $('.datepicker1').val();
+            var date2 = $('.datepicker2').val();            
+            console.log(ten, value, date1, date2);
+            $.ajax({
+                url: '/Admin/voucher/CreateVoucher',
+                method: "GET",
+                data: {TenVoucher:ten, TiLeGiamGia: value, NgayBatDau :date1, NgayKetThuc:date2},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');
+                    location.href="/Admin/voucher/LietKeVoucher";
+                    alert("Create New Voucher Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>

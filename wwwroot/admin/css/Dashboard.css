@@ -1,0 +1,59 @@
+﻿.control__table {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.btn1 {
+    background-color: white;
+    color: #999999;
+    border: 2px solid #4caf50;
+    /* padding-top: 3%; */
+    font-size: 16px;
+}
+
+    .btn1:hover {
+        background-color: #cbf0cc;
+        color: black;
+    }
+
+#btn__control__table {
+    padding-top: 5%;
+    font-size: 23px;
+}
+
+.report__table {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.btn__report {
+    display: grid;
+    grid-template-columns: 25% 25%;
+    grid-template-rows: 90px 90px;
+    grid-row-gap: 5%;
+    grid-column-gap: 1%;
+    margin-top: 1rem;
+    padding-right: 0;
+    margin-left: 30%;
+}
+
+.btn2 {
+    background-color: white;
+    color: #999999;
+    border: 2px solid #4caf50;
+    /* padding-top: 3%; */
+    font-size: 16px;
+}
+
+    .btn2:hover {
+        background-color: #cbf0cc;
+        color: black;
+    }
+
+#btn__report__table {
+    padding-top: 5%;
+    font-size: 23px;
+}

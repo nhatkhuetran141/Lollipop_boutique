@@ -1,0 +1,17 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Areas",
+    "\\Areas\\Admin",
+    "\\Areas\\Admin\\Controllers",
+    "\\Areas\\Admin\\Views",
+    "\\Areas\\Admin\\Views\\Home",
+    "\\Views",
+    "\\Views\\Shared",
+    "\\wwwroot",
+    "\\wwwroot\\assets",
+    "\\wwwroot\\assets\\css"
+  ],
+  "SelectedNode": "\\Areas\\Admin\\Views\\Home\\Index.cshtml",
+  "PreviewInSolutionExplorer": false
+}

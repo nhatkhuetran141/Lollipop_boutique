@@ -1,0 +1,95 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.sanpham
+@{
+    ViewData["Title"] = "Create New Product";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+        <link href="~/admin/css/Product.css" rel="stylesheet"/>
+         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <div class="card">
+        <div class="card-header"><h3>Thêm sản phẩm</h3></div>
+    </div>
+<div class="container">
+        <form>
+        <div class="createcategory" style="border-color: coral;border-radius: 25px;margin-top: 5%; padding: 3% 3% 7% 3%; border: 2px solid #aaa;">
+            <a href="~/Admin/sanpham/LietKeSP" style="margin-bottom:2%"class="btn btn-success">Back to Customer Management</a>               
+            <div class="row body_insertcustomer">
+                <div class="col-md">            
+                                    <!-- MaKH input --><!-- Name -->
+                    <div class="input_field">
+                        <div class="input_field_title">Tên sản phẩm*</div>
+                        <input type="text" id="name" name="TenSP" placeholder="Non vanh rong"/>
+                    </div>                  
+                                    <!-- street address -->                                   
+                     <div class="input_field">
+                        <div class="input_field_title">Giá*</div>
+                        <input type="text" id="price" name="GiaTien" placeholder="200000">
+                     </div>
+                     <div class="input_field">
+                        <div class="input_field_title">Số lượng</div>
+                        <input type="text" id="quantity" name="SoLuong" placeholder="20">
+                    </div>
+                </div>                                <!--ben phai -->
+                <div class="col-md">                                      
+                    <div class="input_field">
+                        <div class="input_field_title">Danh mục</div>
+                        <select class="input_field_selector" id="madanhmuc" name="MaDanhMuc">
+                            <option value="1">Nón lưới trai</option>
+                            <option value="2">Nón len</option>    
+                            <option value="3">Nón vành rộng</option>     
+                        </select>
+                    </div>
+                    <div class="input_field">
+                        <div class="input_field_title">Nhà cung cấp</div>
+                        <select class="input_field_selector" id="mancc" name="MaNCC">
+                            <option value="1">New Era</option>
+                            <option value="2">Adidas</option>    
+                            <option value="3">Nike</option>     
+                        </select>
+                    </div>
+                    <div class="input_field">
+                        <div class="input_field_title">Mô tả</div>
+                        <input type="text" id="description" name="MoTa" placeholder="Visitor....">
+                    </div>                  
+                 </div>    
+            </div>    
+             <a href="javascript:void(0)" class="btn btn-success btn_insertproduct" value="Thêm" style="float:right">Thêm sản phẩm</a>    
+        </div>            
+        
+     </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_insertproduct").click(function () {
+            console.log ('Da vao click');             
+            var name = $('#name').val();
+            var price = $('#price').val();
+            var quantity = $('#quantity').val();
+            var madanhmuc = $('#madanhmuc').val();
+            var mancc = $('#mancc').val();
+            var description = $('#description').val();            
+            console.log(name, price, quantity, madanhmuc, mancc, description);
+            $.ajax({
+                url: '/Admin/sanpham/EnterProduct',
+                method: "GET",
+                data: {TenSP:name, GiaTien:price, SoLuong:quantity, MaDanhMuc: madanhmuc, MaNCC:mancc, MoTa:description},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');
+                     location.href="/Admin/hinhanh/EnterHA";
+                    alert("Create Product Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>

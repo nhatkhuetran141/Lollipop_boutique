@@ -1,0 +1,76 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.dondathang
+@{
+    ViewData["Title"] = "Update Order Status";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/admin/css/Categoryadmin.css" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+            
+</head>        
+<div class="card-header"><h3>Tình trạng đơn hàng @Model.MaDDH</h3></div>
+<div class="container">
+    <form>
+        <div class="createcategory" style="border-color: coral;border-radius: 25px;margin-top: 8%; padding: 3% 3% 5% 3%; border: 2px solid #aaa">
+            <a href="~/Admin/dondathang/ViewOrderAll" class="btn btn-primary" style="margin-bottom:1%">Quay lại</a>               
+            <div class="row body_insertcustomer">
+                <div class="col-md">            
+                        <!-- MaKH input -->
+                    <div class="input_field">
+                        <div class="input_field_title">Mã đơn hàng*</div>
+                        <input style="width:25%" type="text" id="idtype" name="MaDDH" placeholder="VD:KH01" value="@Model.MaDDH" disabled="disabled"/>                   
+                    </div>
+                    <div class="input_field">
+                        <div class="input_field_title">Trạng thái</div>
+                            <select class="input_field_selector" style="height:50px; border-radius:15px" id="status" name="TINHTRANGDONHANG" value="@Model.TINHTRANGDONHANG"> 
+                                <option value="0">Đang chuẩn bị</option>
+                                <option value="1">Đang giao</option>    
+                                <option value="2">Đã giao</option>                      
+                            </select>
+                    </div>                                            
+                </div>  
+            </div>
+            <a href="javascript:void(0)" class="btn btn-success btn_updatetype" value="Update"style="float:right">Update</a>   
+        </div>            
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_updatetype").click(function () {
+            console.log ('Da vao click');       
+            var ma = $('#idtype').val();
+            var mota =$('#status').val();
+            console.log(ma, mota);
+            $.ajax({
+                url: '/Admin/dondathang/UpdateOrder',
+                method: "GET",
+                 data: {MaDDH:ma, TINHTRANGDONHANG:mota},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');     
+                    location.href="/Admin/dondathang/ViewOrderAll";
+                    alert("Update Order Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>
+   
+
+   
+    
+

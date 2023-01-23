@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Update Category";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link href="~/admin/css/Dashboard.css" rel="stylesheet"/>
+<hr style="width:60%; margin-left:18%;margin-top:3%"/> 
+<div class="main-content">
+    <div class="control__table">CONTROL TABLE</div>
+    <div class="btn__control" style="margin-left:30%">
+        <a class="btn btn1" href=~/Admin/sanpham/LietKeSP>
+            <i class="nav-icon fas fa-shopping-cart" id="btn__control__table"></i><br>
+            Đi tới trang sản phẩm
+        </a>
+        <a class="btn btn1" href=~/Admin/danhmucsp/LietKeCategory>
+            <i class="nav-icon fas fa-stream" id="btn__control__table"></i><br>
+            Đi tới trang danh mục
+        </a>
+        <a class="btn btn1" href=~/Admin/Khachhang/LietKeKH>
+            <i class="fas fa-user" id="btn__control__table"></i><br>
+            Đi tới trang khách hàng
+        </a>
+        <a class="btn btn1" href=~/Admin/dondathang/ViewOrderAll>
+            <i class="nav-icon fas fa-file-alt" id="btn__control__table"></i><br>
+            Đi tới trang đơn hàng
+        </a>
+    </div>
+
+    <hr style="width:60%; margin-left:15%;margin-top:3%" />
+    <div class="report__table">STATISTICAL</div>
+    <div class="btn__report" style="margin-left:32%">
+        <a class="btn btn2" href=~/Admin/ThongKe/SanPham_DanhMuc>
+            <i class="nav-icon fas fa-shopping-cart" id="btn__report__table"></i><br>
+            Thống kê danh mục
+        </a>
+        <a class="btn btn2" href=~/Admin/ThongKe/DanhThu_Thang>
+            <i class="nav-icon fas fa-stream" id="btn__report__table"></i><br>
+            Doanh thu mỗi tháng
+        </a>
+        <a class="btn btn2" href=~/Admin/ThongKe/TK_NhaVanChuyen>
+            <i class="fas fa-shipping-fast" id="btn__report__table"></i><br>
+            Đơn vị vận chuyển yêu thích
+        </a>
+        <a class="btn btn2" href=~/Admin/ThongKe/Top10DonHang>
+            <i class="nav-icon fas fa-file-alt" id="btn__report__table"></i><br>
+            Top 10 đơn hàng giá cao nhất
+        </a>
+    </div>
+</div>
+
+

@@ -1,0 +1,101 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.hinhanh
+@{
+    ViewData["Title"] = "Update Category";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/admin/css/Categoryadmin.css" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+            
+</head>        
+<div class="card-header"><h3>Hình ảnh @Model.MASP</h3></div>
+<div class="container">
+    <form>
+        <div class="createcategory" style="border-color: coral;border-radius: 25px;margin-top: 8%; padding: 3% 3% 5% 3%; border: 2px solid #aaa">
+            <a href="~/Admin/sanpham/LietKeSP" class="btn btn-primary" style="margin-bottom:1%">Quay lại</a>               
+            <div class="row body_insertcustomer">
+                <div class="col-md">            
+                        <!-- MaKH input -->
+                    <div class="input_field">
+                        <div class="input_field_title">Link hình ảnh*</div>
+                        <input style="width:25%" type="text" id="image" name="LINKHINHANH" placeholder="VD:KH01" value="@Model.LINKHINHANH"/>                   
+                    </div>
+                            <!-- Name -->
+                    <div class="input_field">
+                        <div class="input_field_title">Mã sản phẩm*</div>
+                        <input type="text" id="name" name="MASP" placeholder="Mã sản phẩm " value="@Model.MASP"/>
+                    </div>   
+                </div>  
+            </div>    
+            <a href="javascript:void(0)" class="btn btn-success btn_updatetype" value="Update"style="float:right">Update</a>    
+            <a href="javascript:void(0)" class="btn btn-danger btn_deletetype" value="Delete"style="float:left">Delete</a> 
+        </div>            
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_updatetype").click(function () {
+            console.log ('Da vao click');    
+            //var id =$('#idtype').val();
+            var image = $('#image').val();   
+            var ten = $('#name').val();
+            console.log(image,ten);
+            $.ajax({
+                url: '/Admin/hinhanh/UpdateHA',
+                method: "GET",
+                data: {LINKHINHANH:image,MASP:ten},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');
+                    location.href="/Admin/sanpham/LietKeSP";
+                    alert("Create New Image Product Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+    $(document).ready(function () {
+        $(".btn_deletetype").click(function () {
+            console.log ('Da vao click');    
+            //var id =$('#idtype').val();
+            var image = $('#image').val();   
+            var ten = $('#name').val();
+            console.log(image,ten);
+            $.ajax({
+                url: '/Admin/hinhanh/DeleteHA',
+                method: "GET",
+                data: {LINKHINHANH:image,MASP:ten},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');
+                    location.href="/Admin/sanpham/LietKeSP";
+                    alert("Create Image Product Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>
+
+   
+    
+

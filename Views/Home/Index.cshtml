@@ -1,0 +1,187 @@
+@using doan.Models
+@{ List<string> list_HA = (List<string>)ViewBag.HinhAnhSP; }
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Begin Slider Area -->
+<div class="slider-area">
+
+    <!-- Main Slider -->
+    <div class="swiper-container main-slider swiper-arrow with-bg_white">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide animation-style-01">
+
+                <div class="slide-inner bg-height" data-bg-image="/assets/images/slider/bg/slide_giangsinh.png">
+                    <div class="parallax-img-wrap">
+                        <div class="chilly">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+
+                                    <!--<img src="~/assets/images/slider/bg/slide_giangsinh.png" alt="Inner Image"> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="swiper-slide animation-style-01">
+
+                <div class="slide-inner bg-height" data-bg-image="/assets/images/slider/bg/background1.png">
+
+                    <div class="parallax-img-wrap">
+                        <div class="chilly">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.2">
+
+                                    <img src="~/assets/images/slider/inner-img/inner_image_1.png" alt="Inner Image">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="avocado">
+                            <div class="scene fill">
+                                <div class="expand-width" data-depth="0.5">
+
+                                    <img src="~/assets/images/slider/inner-img/inner_image_2.png" alt="Inner Image">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination with-bg d-md-none"></div>
+
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</div>
+<!-- Slider Area End Here -->
+<!-- Begin Product Area -->
+<div class="product-area section-space-top-100">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav product-tab-nav pb-10" id="myTab" role="tablist">
+                    
+                    <li class="nav-item" role="presentation">
+                        <a href="/1/Đồ%20trang%20trí%20nhà%20cửa.html">
+
+
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/home_icon.png" alt="Product Icon" width="200px">
+                            </div>
+                            NEW ERA
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="/4/Đèn.html">
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/lamp_icon.png" alt="Product Icon">
+                            </div>
+                            ADIDAS
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="/8/Giấy%20và%20decal%20dán%20tường.html">
+                            <div class="product-tab-icon">
+                                <img src="~/assets/images/product/icon/paintingframe_icon.png" alt="Product Icon">
+                            </div>
+                            NIKE
+                        </a>
+                    </li>
+                </ul>
+                <div class="TopSP">Top sản phẩm bán chạy:</div>
+                <div class="tab-content" id="myTabContent">
+
+                    <div class="product-grid-view row">
+                        @{ var stt = 0; }
+                        @foreach (var item in (List<Sanpham>)Model)
+                        {
+                    <div class="col-lg-3 col-sm-6">
+                        <div class="product-item">
+                            <div class="product-img img-zoom-effect">
+                                <a href="SanPham/Details?masp=@item.MaSp">
+                                    <img class="img-full" src="@list_HA[stt]" alt="Product Images">
+                                </a>
+                                <div class="product-add-action">
+                                    <ul>
+                                        <li>
+                                            @{ stt += 1;
+                                                var id_add = "add_cart" + @stt.ToString(); }
+                                            <form action="/GioHang/Add_cart?product_id=@item.MaSp" method="post" id="@id_add">
+                                                <a href="#" onclick="document.getElementById('@id_add').submit();">
+                                                    <i class="pe-7s-cart"></i>
+                                                </a>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <a class="product-name" href="single-product.html">@item.TenSp</a>
+                                <div class="price-box pb-1">
+                                    <span class="new-price text-danger">@item.GiaTien.Value.ToString("#,##0") VNĐ</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>}
+
+
+                    </div>
+                            
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Area End Here -->
+    <!-- Begin Shipping Area -->
+    <div class="shipping-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="shipping-item">
+                        <div class="shipping-img">
+                            <img src="~/assets/images/shipping/icon/free_shipping.jpg" alt="Shipping Icon">
+                        </div>
+                        <div class="shipping-content">
+                            <h5 class="title">Tốc độ</h5>
+                            <p class="short-desc mb-0">Giao hàng nhanh chóng</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pt-6 pt-md-0">
+                    <div class="shipping-item">
+                        <div class="shipping-img">
+                            <img src="~/assets/images/shipping/icon/online_support.jpg" alt="Shipping Icon">
+                        </div>
+                        <div class="shipping-content">
+                            <h5 class="title">Bảo mật</h5>
+                            <p class="short-desc mb-0">Thanh toán an toàn</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 pt-6 pt-lg-0">
+                    <div class="shipping-item">
+                        <div class="shipping-img">
+                            <img src="~/assets/images/shipping/icon/secure_payment.jpg" alt="Shipping Icon">
+                        </div>
+                        <div class="shipping-content">
+                            <h5 class="title">Uy tính</h5>
+                            <p class="short-desc mb-0">Sản phẩm chính hãng chất lượng cao</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shipping Area End Here -->

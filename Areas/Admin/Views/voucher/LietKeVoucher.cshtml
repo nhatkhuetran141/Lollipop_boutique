@@ -1,0 +1,132 @@
+﻿@*@model IEnumerable<Lollipop_boutique.Areas.Admin.Models.Customer>*@
+
+@model IEnumerable<Lollipop_boutique.Areas.Admin.Models.voucher>
+
+@{
+    ViewData["Title"] = "Voucher List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }    
+    <link href="~/admin/css/DSKhachHang.css" rel="stylesheet"/>
+    <div class="card-header"><h3>Voucher Management</h3></div>
+    <div id="test"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="title_customer" style="margin-left:46%">Voucher List</h2>    
+           @* <form >
+                <label for="name">Nhập tên khách hàng cần tìm</label>
+                <input type="text" name="name"><br />
+                <input href="~/Admin/Customer/SearchCustomer?name=@Html.DisplayNameFor(Model => Model.name)" type="Submit" name="Submit" value="Tìm" class="btn btn-primary search">
+            </form> *@           
+
+            <table class="table" style="width:100%;margin-left:10%; text-align:center">
+                <thead class="thead-dark">
+                    <tr style="color:blue">
+                        <th style="width:150px">ID</th>
+                        <th style="width:400px">Name</th>
+                        <th style="width:250px">Value </th>
+                        <th style="width:400px">Start date</th>
+                        <th style="width:250px">Finish date</th>                        
+                        <th style="width:150px">Function</th>                      
+                    </tr>
+                </thead>
+                <tbody class="thead-light">
+                    @foreach (var item in Model)
+                    {
+                        <tr id="hehe">
+                            <td>
+                                @item.MaVoucher
+                            </td>
+                            <td>
+                                @item.TenVoucher
+                            </td>
+                            <td>
+                                @item.TiLeGiamGia
+                            </td>
+                            <td>
+                                @item.NgayBatDau
+                            </td>
+                            <td>
+                                @item.NgayKetThuc
+                            </td>                           
+                            <td>                            
+                                <a href="~/Admin/voucher/ViewVoucher?MaVoucher=@item.MaVoucher" class="btn btn-primary btn_update_customer"><i class="fas fa-pencil-alt icon_update_customer"></i></a>
+                                <a href="~/Admin/voucher/DeleteVoucher?MaVoucher=@item.MaVoucher" class="btn btn-danger btn_delete_customer"><i class="fas fa-trash-alt icon_delete_customer"></i></a>
+                            </td>                            
+                        </tr>
+                     }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    @*<div aria-label="Page navigation">
+        <ul class="pagination">
+            <pager class="pager-container" list="@Model" href="~/Admin/Customer/LietKeKH"></pager>
+        </ul>
+    </div>*@
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_delete_customer").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idcustomer').val();
+            var ten = $('#namecustomer').val();
+            var date = $('#datepicker').val();
+            var address = $('#addresscustomer').val();
+            var gender = $('#gendercustomer').val();
+            var phone =$('#phonecustomer').val();
+            var type =$('#typecustomer').val();
+            console.log(id,ten, date, address, gender, phone, type);
+            $.ajax({
+                url: '/Admin/voucher/DeleteVoucher',
+                method: "GET",
+                   data: {MaKH:id, TenKH:ten, NgaySinh : date, DiaChi :address, GioiTinh:gender,  SoDienThoai:phone, LoaiKH:type},
+                success: function (data) {                   
+                    location.href="/Admin/voucher/LietKeVoucher";
+                    alert("Delete Voucher Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });      
+        ////$(document).ready(function () {
+        ////$("#search").click(function () {
+        ////    console.log ('Da vao click');    
+        ////    var id =$('#idcustomer').val();
+        //    //var ten = $('#namecustomer').val();
+        //    //var date = $('#datepicker').val();
+        //    //var address = $('#addresscustomer').val();
+        //    //var gender = $('#gendercustomer').val();
+        //    //var point =$('#pointcustomer').val();
+        //    //var phone =$('#phonecustomer').val();
+        //    //var type =$('#typecustomer').val();
+        //    console.log(id/*,ten, date, address, gender, point, phone, type*/);
+        //    $.ajax({
+        //        url: '/Admin/Customer/SearchCustomer',
+        //        method: "GET",
+        //        data: {customer_id:id/*, name:ten, date_of_birth : date, address :address, gender:gender, point:point, phone:phone, customer_type:type*/},
+        //        success: function (data) {                   
+        //            //location.href="/Admin/Customer/SearchCustomer";
+        //            alert("Delete Customer Successful");
+        //            //$('#test').attr("class","alert alert-success");
+        //            //$('#test').html('Da Them thanh cong');
+        //            //console.log("dang LietKeKH");
+        //        },
+        //        error: function (data) {
+        //            alert('Error');
+        //        }
+        //    });
+          
+        //});      
+          
+        
+    });
+</script>
+

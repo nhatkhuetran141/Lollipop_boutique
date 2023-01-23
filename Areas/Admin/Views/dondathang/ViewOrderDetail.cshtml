@@ -1,0 +1,94 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.dondathang
+@{
+    ViewData["Title"] = "View Order List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }    
+    <link href="~/admin/css/ViewOrderProduct.css" rel="stylesheet"/>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />   
+</head> 
+<div class="card-header"><h3>View Order</h3></div>
+    <div id="test"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="title_customer" style="margin-left:46%">List Order</h2>            
+            <a href="~/Admin/dondathang/ViewOrderAll" class="btn btn-primary" style="margin-bottom:1%">Back to Order Management</a>     
+            <div id="body_viewOrder">
+                <table class="table" style="width:100%; margin-left:5%; text-align:center">
+                    <tr>
+                       
+                        <th>Mã sản phẩm</th>
+                        <th>Hình ảnh</th>
+                        <th>Số lượng</th>   
+                        <th>Giá</th> 
+                    </tr>         
+
+                    @foreach (var item in ViewBag.ListOrderDetail)
+                    {
+                        
+                        <tr id="table_ViewOrder">
+                            
+                            <td>
+                                @item.GetType().GetProperty("MaSP").GetValue(item,null)
+                            </td>
+                            <td>
+                               <img style="width:120px; height:120px" src="@item.GetType().GetProperty("LINKHINHANH").GetValue(item,null)"/>
+                            </td>                    
+                            <td>
+                                @item.GetType().GetProperty("SoLuong").GetValue(item,null)
+                            </td>                    
+                            <td>
+                                @item.GetType().GetProperty("GiaTien").GetValue(item,null)
+                            </td>                            
+                        </tr>
+                    }
+                </table>
+            </div>      
+        </div>
+     </div>
+</div>
+
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_delete_customer").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idcustomer').val();
+            var ten = $('#namecustomer').val();
+            var date = $('#datepicker').val();
+            var address = $('#addresscustomer').val();
+            var gender = $('#gendercustomer').val();
+            var point =$('#pointcustomer').val();
+            var phone =$('#phonecustomer').val();
+            var type =$('#typecustomer').val();
+            console.log(id,ten, date, address, gender, point, phone, type);
+            $.ajax({
+                url: '/Admin/Customer/DeleteKhachHang',
+                method: "GET",
+                data: {customer_id:id, name:ten, date_of_birth : date, address :address, gender:gender, point:point, phone:phone, customer_type:type},
+                success: function (data) {                   
+                    location.href="/Admin/Customer/LietKeKH";
+                    alert("Xoa thông tin thành công");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Lỗi');
+                }
+            });
+          
+        });
+    });
+</script>
+
+*@

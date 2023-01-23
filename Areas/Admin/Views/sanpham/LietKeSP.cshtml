@@ -1,0 +1,105 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.sanpham
+@{
+    ViewData["Title"] = "Liệt kê Sản Phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }    
+   @* <link href="~/admin/css/DSKhachHang.css" rel="stylesheet"/>*@
+    <div class="card-header"><h3>Danh sách sản phẩm</h3></div>
+    <div id="test"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="title_customer" style="margin-left:46%">Danh sách sản phẩm</h2>              
+           @* <form >
+                <label for="name">Nhập tên khách hàng cần tìm</label>
+                <input type="text" name="name"><br />
+                <input href="~/Admin/Customer/SearchCustomer?name=@Html.DisplayNameFor(Model => Model.name)" type="Submit" name="Submit" value="Tìm" class="btn btn-primary search">
+            </form> *@
+
+            <table class="table" style="width:100%;margin-left:10%; text-align:center">
+                <thead class="thead-dark">
+                    <tr style="color:blue">
+                        <th style="width:150px">Mã sản phẩm</th>
+                        <th style="width:400px">Tên sản phẩm</th>
+                        <th style="width:250px">Giá</th>
+                        <th style="width:400px">Số lượng</th>
+                        <th style="width:250px">Mô tả</th>                        
+                        <th style="width:250px">Hình ảnh</th>
+                        <th style="width:250px">Chức năng</th>
+                        <th style="width:250px">Xóa ảnh</th>
+                    </tr>
+                </thead>
+                <tbody class="thead-light" style="text-align:center">
+                    @foreach (var item in ViewBag.ListSP)
+                    {
+                        <tr id="hehe">
+                            <td>
+                                @item.GetType().GetProperty("MaSP").GetValue(item,null)
+                            </td>
+                            <td>
+                               @item.GetType().GetProperty("TenSP").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("GiaTien").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("SoLuong").GetValue(item,null)
+                            </td>
+                             <td>
+
+
+                                @item.GetType().GetProperty("MoTa").GetValue(item,null)
+                            </td>
+                             <td>
+                                <img style="width:120px; height:120px" src="@item.GetType().GetProperty("LINKHINHANH").GetValue(item,null)"/>
+                            </td>                          
+                           
+                            <td>                            
+                                <a href="~/Admin/sanpham/ViewSP?MaSP=@item.GetType().GetProperty("MaSP").GetValue(item,null)" class="btn btn-primary btn_update_customer"><i class="fas fa-pencil-alt icon_update_customer"></i></a>
+                                <a href="~/Admin/sanpham/DeleteSP?MaSP=@item.GetType().GetProperty("MaSP").GetValue(item,null)" class="btn btn-danger btn_delete_customer"><i class="fas fa-trash-alt icon_delete_customer"></i></a>
+                            </td> 
+                            <td>                          
+                                <a href="~/Admin/hinhanh/ViewHA?MaSP=@item.GetType().GetProperty("MaSP").GetValue(item,null)" class="btn btn-warning btn_delete_image"><i class="fas fa-images icon_delete_customer"></i></a>
+                            </td>
+                        </tr>
+                     }
+                </tbody>s
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_delete_custome").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idsp').val();
+            var ten = $('#namesp').val();
+            var quantity = $('#quantity').val();
+            var price = $('#price').val();
+            var madanhmuc = $('#madanhmuc').val();           
+            var mancc =$('#mancc').val();
+            var mota =$('#mota').val();
+            console.log(id,ten, quantity, price, madanhmuc, mancc, mota);
+            $.ajax({
+                url:'/Admin/sanpham/DeleteSP',
+                method: "GET",
+                data: {MaSP:id, TenSP:ten, GiaTien:price, SoLuong:quantity, MaDanhMuc: madanhmuc, MaNCC:mancc, MoTa:mota},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');
+                     location.href="/Admin/sanpham/LietKeSP";
+                    alert("Delete Product Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>
+

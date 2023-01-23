@@ -1,0 +1,109 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.Khachhang
+@{
+    ViewData["Title"] = "Update Customer";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <link href="~/admin/css/EditCustomer.css" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+            
+</head>        
+<div class="card-header"><h3>Khách hàng: @Model.TenKH</h3></div>
+<div class="container">
+    <form>
+        <div class="Viewcustomer" style="border-color: coral;border-radius: 25px;margin-top: 5%; padding: 3% 3% 7% 3%; border: 2px solid #aaa;">
+            <a href="~/Admin/Khachhang/LietKeKH" style="margin-bottom:2%" class="btn btn-success">Quay lại</a>              
+            <div class="row body_insertcustomer">
+                <div class="col-md">            
+                        <!-- MaKH input -->
+                    <div class="input_field">
+                                    <div class="input_field_title">Mã khách hàng*</div>
+                                    <input type="text" id="idcustomer" name="MaKH" placeholder="VD:KH01" value="@Model.MaKH" disabled="disabled"/>                   
+                                </div>
+                                <!-- Name -->
+                                <div class="input_field">
+                                    <div class="input_field_title">Tên khách hàng*</div>
+                                    <input type="text" id="namecustomer" name="TenKH" placeholder="Nguyễn Văn A" value="@Model.TenKH"/>
+                                </div>                  
+                                <!-- street address -->
+                                <div class="input_field">
+                                     <div class="input_field_title">Sinh nhật*</div>
+                                     @*<input type="text" id="date_of_birth" name="date_of_birth">*@
+                                     <input id="datepicker" width="276" name="NgaySinh"value="@Model.NgaySinh"/>
+                                </div>                      
+                                <script>
+                                    $('#datepicker').datepicker({
+                                        uiLibrary: 'bootstrap4'
+                                    });                                       
+                                </script>
+                                <div class="input_field">
+                                    <div class="input_field_title">Số điện thoại*</div>
+                                    <input type="text" id="phonecustomer" name="SoDienThoai" placeholder="SĐT"value="@Model.SoDienThoai">
+                                </div>
+                            </div>
+                            <!--ben phai -->
+                            <div class="col-md">  
+                                <div class="input_field">
+                                    <div class="input_field_title">Giới tính</div>
+                                    <select class="input_field_selector" id="gendercustomer" name="GioiTinh"value="@Model.GioiTinh">
+                                        <option value="Nam">Nam</option>
+                                        <option value="Nữ">Nữ</option>                           
+                                    </select>
+                                </div>                               
+                                <div class="input_field">
+                                    <div class="input_field_title">Loại khách hàng</div>
+                                    <input type="text" id="typecustomer" name="LoaiKH" placeholder="Visitor...."value="@Model.LoaiKH">
+                                </div>
+                            </div>      
+                            <div class="input_field">
+                                <div class="input_field_title">Địa chỉ</div>
+                                <input type="text" id="addresscustomer" name="DiaChi" placeholder="Địa chỉ"value="@Model.DiaChi">
+                            </div>  
+                </div>    
+            <a href="javascript:void(0)" class="btn btn-success btn_updatecustomer" value="Update" style="float:right">Update</a>       
+        </div>            
+    </form>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_updatecustomer").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idcustomer').val();
+            var ten = $('#namecustomer').val();
+            var date = $('#datepicker').val();
+            var address = $('#addresscustomer').val();
+            var gender = $('#gendercustomer').val();           
+            var phone =$('#phonecustomer').val();
+            var type =$('#typecustomer').val();
+            console.log(id,ten, date, address, gender, phone, type);
+            $.ajax({
+                url: '/Admin/khachhang/UpdateKhachHang',
+                method: "GET",
+                data: {MaKH:id, TenKH:ten, NgaySinh : date, DiaChi :address, GioiTinh:gender,  SoDienThoai:phone, LoaiKH:type},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    //console.log('Thanh cong');
+                    location.href="/Admin/khachhang/LietKeKH";
+                    alert("Update Customer Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>
+   
+    
+

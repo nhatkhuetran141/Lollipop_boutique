@@ -1,0 +1,115 @@
+﻿@*@model IEnumerable<Lollipop_boutique.Areas.Admin.Models.Customer>*@
+
+@model IEnumerable<Lollipop_boutique.Areas.Admin.Models.Khachhang>
+
+@{
+    ViewData["Title"] = "Customer List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }    
+    <link href="~/admin/css/DSKhachHang.css" rel="stylesheet"/>
+    <div class="card-header"><h3>Quản lý khách hàng</h3></div>
+    <div id="test"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="title_customer" style="margin-left:46%">Customer List</h2>    
+           @* <form >
+                <label for="name">Nhập tên khách hàng cần tìm</label>
+                <input type="text" name="name"><br />
+                <input href="~/Admin/Customer/SearchCustomer?name=@Html.DisplayNameFor(Model => Model.name)" type="Submit" name="Submit" value="Tìm" class="btn btn-primary search">
+            </form> *@           
+
+            <table class="table" style="width:100%;margin-left:10%; text-align:center">
+                <thead class="thead-dark">
+                    <tr style="color:blue">
+                        <th style="width:150px">Mã khách hàng</th>
+                        <th style="width:400px">Tên khách hàng</th>
+                        <th style="width:250px">Ngày sinh</th>
+                        <th style="width:400px">Địa chỉ</th>
+                        <th style="width:250px">Giới tính</th>
+                        <th style="width:350px">Số điện thoại</th>
+                        <th style="width:350px">Loại khách hàng</th>
+                        <th style="width:150px">Chức năng</th>
+                        <th style="width:250px">Đơn hàng</th>
+                    </tr>
+                </thead>
+                <tbody class="thead-light">
+                    @foreach (var item in Model)
+                    {
+                        <tr id="hehe">
+                            <td>
+                                @item.MaKH
+                            </td>
+                            <td>
+                                @item.TenKH
+                            </td>
+                            <td>
+                                @item.NgaySinh
+                            </td>
+                            <td>
+                                @item.DiaChi
+                            </td>
+                            <td>
+                                @item.GioiTinh
+                            </td>
+                            <td>
+                                @item.SoDienThoai
+                            </td>
+                            <td>
+                                @item.LoaiKH
+                            </td>
+                            <td>                            
+                                <a href="~/Admin/Khachhang/ViewKhachHang?MaKH=@item.MaKH" class="btn btn-primary btn_update_customer"><i class="fas fa-pencil-alt icon_update_customer"></i></a>
+                                <a href="~/Admin/Khachhang/DeleteKhachHang?MaKH=@item.MaKH" class="btn btn-danger btn_delete_customer"><i class="fas fa-user-times icon_delete_customer"></i></a>
+                            </td>
+                            <td>
+                                <a href="~/Admin/dondathang/ViewOrder_Product?MaKH=@item.MaKH" class="btn btn-info btn_info_customer"><i class="fas fa-shopping-cart icon_info_customer"></i></a>
+                            </td>
+                        </tr>
+                     }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    @*<div aria-label="Page navigation">
+        <ul class="pagination">
+            <pager class="pager-container" list="@Model" href="~/Admin/Customer/LietKeKH"></pager>
+        </ul>
+    </div>*@
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_delete_customer").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idcustomer').val();
+            var ten = $('#namecustomer').val();
+            var date = $('#datepicker').val();
+            var address = $('#addresscustomer').val();
+            var gender = $('#gendercustomer').val();
+            var phone =$('#phonecustomer').val();
+            var type =$('#typecustomer').val();
+            console.log(id,ten, date, address, gender, phone, type);
+            $.ajax({
+                url: '/Admin/Khachhang/DeleteKhachHang',
+                method: "GET",
+                data: {MaKH:id, TenKH:ten, NgaySinh : date, DiaChi :address, GioiTinh:gender,  SoDienThoai:phone, LoaiKH:type},
+                success: function (data) {                   
+                    location.href="/Admin/khachhang/LietKeKH";
+                    alert("Delete Customer Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });      
+        
+        
+    });
+</script>
+

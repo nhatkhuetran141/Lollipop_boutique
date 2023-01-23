@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Lollipop_boutique.Areas.Admin.Models.danhmucsp>
+@{
+    ViewData["Title"] = "Category List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link href="~/admin/css/Categoryadmin.css" rel="stylesheet"/>
+<div class="card-header"><h3>Category Management</h3></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="title_customer" style="margin-left:46%">Category List</h2>                
+            <table class="table" style="width:100%; margin-left:10%; text-align:center">
+                <thead class="thead-dark">
+                    <tr style="color:blue">
+                        <th>Mã danh mục</th>
+                        <th>Tên danh mục</th>  
+                        <th>Mô tả</th>  
+                        <th>Chỉnh sửa</th>
+                        <th>Xóa</th>
+                    </tr>
+                </thead>
+                <tbody class="thead-light">
+                    @foreach (var item in Model)
+                    {
+                        <tr id="hehe">
+                            <td> 
+                                @item.MaDanhMuc
+                            </td>
+                            <td>
+                                @item.TenDanhMuc
+                            </td> 
+                              <td>
+                                @item.MoTa
+                            </td>
+                            <td>                            
+                                <a href="~/Admin/danhmucsp/ViewCategory?MaDanhMuc=@item.MaDanhMuc" class="btn btn-primary btn_update_customer" style="padding: 3px 6px;"><i class="fas fa-pencil-alt icon_update_customer"></i></a>                              
+                            </td>
+                            <td>
+                               <a href="~/Admin/danhmucsp/DeleteCategory?MaDanhMuc=@item.MaDanhMuc" class="btn btn-danger btn_delete_category" style="padding: 3px 6px;"><i class="fas fa-trash icon_delete_customer"></i></a>
+                            </td>
+                        </tr>
+                     }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_delete_category").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idtype').val();
+            var ten = $('#nametype').val();                
+            console.log(id,ten);
+            $.ajax({
+                url: '/Admin/danhmucsp/DeleteCategory',
+                method: "GET",
+                data: {customer_id:id, name:ten},
+                success: function (data) {                   
+                    location.href="/Admin/danhmucsp/LietKeCategory";
+                    alert("Delete Category Sucessfull");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>

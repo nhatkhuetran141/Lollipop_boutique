@@ -1,0 +1,129 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.dondathang
+@{
+    ViewData["Title"] = "View Order List";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }    
+    <link href="~/admin/css/ViewOrderProduct.css" rel="stylesheet"/>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />   
+</head> 
+<div class="card-header"><h3>Đơn hàng</h3></div>
+    <div id="test"></div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10">
+            <h2 class="title_customer" style="margin-left:46%">List Order</h2>                 
+            <div id="body_viewOrder">
+                <table class="table" style="text-align:center;">
+                    <tr>                        
+                        <th scope="col">Mã đơn hàng</th>
+                        <th><div style="overflow: auto;  width: 150px;">Tên khách hàng</div></th>
+                        <th scope="col">Tổng đơn</th>
+                        <th scope="col">Giảm giá</th>
+                        <th scope="col">Thành tiền</th>
+                        <th scope="col">Ngày đặt hàng</th>
+                        <th><div style="overflow: auto;  width: 150px;">Tên người nhận</div></th>
+                        <th scope="col">Số điện thoại người nhận</th>
+                        <th><div style="overflow: auto;  width: 150px;">địa chỉ</div></th>
+                        <th scope="col">Trạng thái</th>
+                        <th><div style="overflow: auto;  width: 150px;">Chức năng</div></th>
+</tr>                   
+                    @foreach (var item in ViewBag.ListOrderAll)
+                    {
+                        <tr id="table_ViewOrder">                           
+                            <td>
+                                @item.GetType().GetProperty("MaDDH").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("TenKH").GetValue(item,null)
+                            </td>                    
+                            <td>
+                                @item.GetType().GetProperty("TongDonHang").GetValue(item,null)
+                            </td>                    
+                            <td>
+                                @item.GetType().GetProperty("SoTienGiam").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("ThanhTien").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("NgayDatHang").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("TENNGUOINHAN").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("SDTNGUOINHAN").GetValue(item,null)
+                            </td>
+                            <td>
+                                @item.GetType().GetProperty("DIACHINHAN").GetValue(item,null)
+                            </td>
+                            <td>
+                                 @if( @item.GetType().GetProperty("TINHTRANGDONHANG").GetValue(item,null) == 0)
+                                    {
+                                        <a  style="color:white" class="btn btn-primary">Đang chuẩn bị</a>
+                                    }
+                                 else if( @item.GetType().GetProperty("TINHTRANGDONHANG").GetValue(item,null) == 1)
+                                    {
+                                        <a  style="color:white"class="btn btn-info">Đang giao</a>
+                                    }
+                                 else if( @item.GetType().GetProperty("TINHTRANGDONHANG").GetValue(item,null) == 2)
+                                    {
+                                        <a  style="color:white"class="btn btn-success">Đã giao</a>
+                                    }                                 
+                            </td>
+                            <td>
+                                 <a href="~/Admin/dondathang/ViewOrder?MaDDH= @item.GetType().GetProperty("MaDDH").GetValue(item,null)" class="btn btn-primary btn_update_customer"><i class="fas fa-pencil-alt icon_update_customer"></i></a>
+                                 <a href="~/Admin/dondathang/ViewOrderDetail?MaDDH= @item.GetType().GetProperty("MaDDH").GetValue(item,null)" class="btn btn-info btn_info_customer"><i class="fas fa-shopping-cart icon_info_customer"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>      
+        </div>
+     </div>
+</div>
+
+
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_delete_customer").click(function () {
+            console.log ('Da vao click');    
+            var id =$('#idcustomer').val();
+            var ten = $('#namecustomer').val();
+            var date = $('#datepicker').val();
+            var address = $('#addresscustomer').val();
+            var gender = $('#gendercustomer').val();
+            var point =$('#pointcustomer').val();
+            var phone =$('#phonecustomer').val();
+            var type =$('#typecustomer').val();
+            console.log(id,ten, date, address, gender, point, phone, type);
+            $.ajax({
+                url: '/Admin/Customer/DeleteKhachHang',
+                method: "GET",
+                data: {customer_id:id, name:ten, date_of_birth : date, address :address, gender:gender, point:point, phone:phone, customer_type:type},
+                success: function (data) {                   
+                    location.href="/Admin/Customer/LietKeKH";
+                    alert("Xoa thông tin thành công");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Lỗi');
+                }
+            });
+          
+        });
+    });
+</script>
+
+*@

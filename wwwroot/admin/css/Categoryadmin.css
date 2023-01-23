@@ -1,0 +1,96 @@
+﻿@charset "UTF-8";
+/*!
+* Start Bootstrap - SB Admin v7.0.4 (https://startbootstrap.com/template/sb-admin)
+* Copyright 2013-2021 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-sb-admin/blob/master/LICENSE)
+*/
+/*!
+ * Bootstrap v5.1.3 (https://getbootstrap.com/)
+ * Copyright 2011-2021 The Bootstrap Authors
+ * Copyright 2011-2021 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+body {
+}
+/* all category */
+.content__header__category {
+    color: #007BFF;
+}
+
+.btn__addcategory__admin {
+    margin-bottom: 1rem;
+    margin-left: 3rem;
+    margin-top: 1rem;
+}
+
+.table__category {
+    margin-left: 3rem;
+    margin-right: 3rem;
+}
+
+.title__category__admin {
+    background-color: white;
+    height: 10%;
+}
+
+.category__admin {
+    background-color: white;
+}
+
+/* create and edit category */
+.categoryadmin__crud {
+    padding: 0 8% 0 15%;
+}
+
+#input__admincategory__crud {
+    padding: 5% 0 5% 10%;
+    margin-left: 5%;
+    margin-right: 10%;
+}
+
+.title__admincategory__crud {
+    font-size: large;
+}
+
+.icon__admincategory___crud {
+    font-size: medium;
+}
+
+#hehe:hover {
+    background-color: #eeeded;
+    cursor: pointer;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+table {
+    border: 1px solid white;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 5px;
+    box-shadow: 1px 1px 1px 1px #aaa;
+}
+input[type="text"] {
+    width: 100%;
+    padding: 10px 16px;
+    border: 1px solid #aaa; /* mau vien border */
+    border-radius: 4px;
+}
+
+    input[type="text"]:focus {
+        outline: none;
+        border: 2px solid #f6ab49; /* mau vien border khi click vao */
+    }
+
+/* input id */
+.input_field {
+    margin-bottom: 16px;
+}
+
+.input_field_title {
+    margin-bottom: 1%;
+    font-size: large;
+}

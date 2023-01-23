@@ -1,0 +1,70 @@
+﻿@model Lollipop_boutique.Areas.Admin.Models.danhmucsp
+@{
+    ViewData["Title"] = "Create New Category";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+<head>
+    <link href="~/admin/css/Categoryadmin.css" rel="stylesheet"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @*<title>Bootstrap 4 DatePicker</title>*@
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <div class="card">
+        <div class="card-header"><h3>Tạo danh mục mới</h3></div>
+    </div>
+</head>
+ <div class="container" style="width:60%">
+    <form>
+        <div class="createcategory" style="border-color: coral;border-radius: 25px;margin-top: 8%; padding: 3% 3% 7% 3%; border: 2px solid #aaa;">
+            <a href="~/Admin/danhmucsp/LietKeCategory" class="btn btn-primary" style="margin-bottom:1%">Trở lại trang quản lý danh mục</a>               
+            <div class="row body_insertcustomer">
+                <div class="col-md">            
+                        <!-- MaKH input -->                    
+                            <!-- Name -->
+                    <div class="input_field">
+                        <div class="input_field_title">Tên danh mục*</div>
+                        <input type="text" id="name" style="width:70%" name="TenDanhMuc" placeholder="Mũ len"/>
+                    </div>
+                     <div class="input_field">
+                        <div class="input_field_title">Mô tả*</div>
+                        <input type="text" id="mota" style="width:70%" name="MoTa" placeholder="Mũ mùa đông"/>
+                    </div>
+                </div>  
+            </div>    
+            <a href="javascript:void(0)" class="btn btn-success btn_insertcategory" value="Thêm" style="float:right">Tạo danh mục</a>    
+        </div>            
+    </form>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".btn_insertcategory").click(function () {
+            console.log ('Da vao click');    
+            //var id =$('#idtype').val();
+            var ten = $('#name').val();       
+            var mota = $('#mota').val();
+            console.log(ten,mota);
+            $.ajax({
+                url: '/Admin/danhmucsp/CreateCategory',
+                method: "GET",
+                data: {TenDanhMuc:ten, MoTa:mota},
+                success: function (data) {
+                    //alert("Them thông tin thành công");
+                    console.log('Thanh cong');
+                    location.href="/Admin/danhmucsp/LietKeCategory";
+                    alert("Create New Category Successful");
+                    //$('#test').attr("class","alert alert-success");
+                    //$('#test').html('Da Them thanh cong');
+                    //console.log("dang LietKeKH");
+                },
+                error: function (data) {
+                    alert('Error');
+                }
+            });
+          
+        });
+    });
+</script>
